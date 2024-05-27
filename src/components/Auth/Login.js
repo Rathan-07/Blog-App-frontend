@@ -1,18 +1,21 @@
+import { useState } from 'react';
 import axios from '../config/axios';
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { ClipLoader } from 'react-spinners'; // Import the ClipLoader spinner
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
     const navigate = useNavigate();
     const { dispatch } = useAuth();
+    const [loading, setLoading] = useState(false); // Initialize loading state
 
     const showToastMessage = () => {
         toast.success("Successfully Logged In!", {
-            position: "top-center",
+            position: "bottom-left",
         });
     };
 
@@ -22,6 +25,8 @@ export default function Login() {
     });
 
     const handleSubmit = async (values, { setSubmitting, setErrors }) => {
+        setLoading(true); // Set loading to true when form is submitted
+
         try {
             const response = await axios.post('/api/users/login', values);
             localStorage.setItem('token', response.data.token);
@@ -32,6 +37,8 @@ export default function Login() {
             });
             dispatch({ type: "LOGIN", payload: { account: userResponse.data } });
             showToastMessage();
+            // Introduce a delay to ensure spinner is visible for at least 2 seconds
+            await new Promise(resolve => setTimeout(resolve, 1000));
             navigate('/list-posts');
         } catch (err) {
             if (err.response && err.response.data.errors) {
@@ -40,6 +47,7 @@ export default function Login() {
                 setErrors({ serverErrors: err.response.data.message });
             }
         } finally {
+            setLoading(false); // Reset loading state after login attempt
             setSubmitting(false);
         }
     };
@@ -72,8 +80,8 @@ export default function Login() {
                                         <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
                                     </div>
 
-                                    <button type="submit" disabled={isSubmitting} className="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition duration-300">
-                                        Sign in
+                                    <button type="submit" disabled={isSubmitting || loading} className="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition duration-300 flex items-center justify-center">
+                                        {loading ? <ClipLoader size={24} color={"#fff"} /> : "Sign in"} {/* Conditional rendering of spinner based on loading state */}
                                     </button>
 
                                     {errors && errors.serverErrors && (
