@@ -3,19 +3,15 @@ import axios from '../config/axios';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { ToastContainer, toast } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 
-export default function Register() {
+export default function Register({registerIn}) {
     const navigate = useNavigate();
     const [serverErrors, setServerErrors] = useState(null);
     
-    const showToastMessage = () => {
-        toast.success("Successfully Registered!", {
-          position: "top-right",
-        });
-    }
+   
 
     const validationSchema = Yup.object().shape({
         username: Yup.string().required('Username is required'),
@@ -34,12 +30,12 @@ export default function Register() {
     const handleSubmit = async (values, { setSubmitting }) => {
         try {
             const response = await axios.post('/api/users/register', values);
-            alert('Succesfully registered')
-            showToastMessage();
+            // alert('Succesfully registered')
+            registerIn()
             navigate('/login');
         } catch (err) {
             setServerErrors(err.response.data.errors);
-            toast.error('Registration failed');
+        
         } finally {
             setSubmitting(false);
         }
@@ -122,7 +118,7 @@ export default function Register() {
                     </div>
                 </div>
             </div>
-            <ToastContainer />
+         
         </section>
     );
 }

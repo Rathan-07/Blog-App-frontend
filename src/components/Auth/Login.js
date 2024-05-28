@@ -2,22 +2,16 @@ import { useState } from 'react';
 import axios from '../config/axios';
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { toast } from "react-toastify";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { ClipLoader } from 'react-spinners'; // Import the ClipLoader spinner
-import "react-toastify/dist/ReactToastify.css";
 
-export default function Login() {
+export default function Login({loggedIn}) {
     const navigate = useNavigate();
     const { dispatch } = useAuth();
     const [loading, setLoading] = useState(false); // Initialize loading state
 
-    const showToastMessage = () => {
-        toast.success("Successfully Logged In!", {
-            position: "bottom-left",
-        });
-    };
+  
 
     const validationSchema = Yup.object().shape({
         email: Yup.string().email('Invalid email format').required('Email is required'),
@@ -36,7 +30,8 @@ export default function Login() {
                 }
             });
             dispatch({ type: "LOGIN", payload: { account: userResponse.data } });
-            showToastMessage();
+            loggedIn()
+            
             // Introduce a delay to ensure spinner is visible for at least 2 seconds
             await new Promise(resolve => setTimeout(resolve, 1000));
             navigate('/list-posts');
