@@ -127,7 +127,7 @@ function PostItem({ post, userId, username, onDelete }) {
                 {post.author === userId && (
                     <div>
                         <button className="text-blue-500 mr-2"><Link to={`/api/posts/${post._id}`}>Edit</Link></button>
-                        <button className="text-red-500" onClick={() => handleDelete(post._id)}>Delete</button>
+                        <button className="text-red-600" onClick={() => handleDelete(post._id)}>Delete</button>
                     </div>
                 )}
             </div>
