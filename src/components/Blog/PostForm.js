@@ -7,18 +7,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import backgroundImage from '../images/bg1.jpg' // Import the background image
 
-export default function PostForm() {
+export default function PostForm({postIn}) {
     const [postForm, setPostForm] = useState({
         title: '',
         content: '',
         featuredImage: ''
     });
 
-    const showToastMessage = () => {
-        toast.success("Post created!", {
-            position: "top-right",
-        });
-    };
+ 
 
     const navigate = useNavigate();
 
@@ -45,8 +41,7 @@ export default function PostForm() {
                 content: '',
                 featuredImage: ''
             });
-            // showToastMessage();
-            alert('Post is created')
+            postIn()
             navigate('/list-posts');
         } catch (error) {
             console.log(error);

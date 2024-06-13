@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import CommentForm from "./comment/CommentForm";
 import CommentList from "./comment/CommentList";
 
+
 export default function PostList() {
     const [posts, setPosts] = useState([]);
     const [userId, setUserId] = useState(null);
     const [user, setUser] = useState(null);
+    
 
     useEffect(() => {
         const fetchPosts = async () => {

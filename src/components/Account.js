@@ -16,14 +16,14 @@ export default function Profile() {
                         <div className="flex flex-col items-center space-y-4">
                             {user.account?.profilePicture && (
                                 <img
-                                    src={`http://localhost:3334/${user.account.profilePicture}`}
+                                    src={`http://localhost:3334/${user?.account?.profilePicture}`}
                                     alt="Profile"
                                     className="rounded-full w-40 h-40 object-cover"
                                 />
                             )}
-                            <p className="text-lg"><strong className="font-semibold">Username:</strong> {user.account.username}</p>
-                            <p className="text-lg"><strong className="font-semibold">Email:</strong> {user.account.email}</p>
-                            <p className="text-lg"><strong className="font-semibold">Bio:</strong> {user.account.bio}</p>
+                            <p className="text-lg"><strong className="font-semibold">Username:</strong> {user?.account?.username}</p>
+                            <p className="text-lg"><strong className="font-semibold">Email:</strong> {user?.account?.email}</p>
+                            <p className="text-lg"><strong className="font-semibold">Bio:</strong> {user?.account?.bio}</p>
                             <button
                                 onClick={() => setIsEdit(true)}
                                 className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 w-full"

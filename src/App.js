@@ -47,6 +47,9 @@ function App() {
   const loggedIn=()=>{
     toast("successfully logged !!")
      }
+     const postIn=()=>{
+      toast("successfully created post !!")
+       }
 
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT' });
@@ -65,7 +68,7 @@ function App() {
               <Route path="/register" element={<Register registerIn={registerIn}/>} />
               <Route path="/account" element={<Account />} />
               <Route path="/list-posts" element={<PostList />} />
-              <Route path="/post-form" element={<PostForm />} />
+              <Route path="/post-form" element={<PostForm postIn ={postIn} />} />
               <Route path='/api/posts/:postId/comments/:commentId' element={<CommentEdit />} />
               <Route path='/api/posts/:postId' element={<PostEdit />} />
              
