@@ -58,7 +58,7 @@ export default function ProfileEdit({ setIsEdit }) {
             <h3 className="text-2xl font-bold mb-4">Edit User</h3>
             {user.account?.profilePicture && (
                 <img
-                    src={`http://localhost:3334/${user.account.profilePicture}`}
+                    src={`https://blog-app-13f4.onrender.com/${user.account.profilePicture}`}
                     alt="Profile"
                     className="w-40 h-40 object-cover rounded-full"
                 />

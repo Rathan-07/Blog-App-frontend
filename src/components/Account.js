@@ -16,7 +16,7 @@ export default function Profile() {
                         <div className="flex flex-col items-center space-y-4">
                             {user.account?.profilePicture && (
                                 <img
-                                    src={`http://localhost:3334/${user?.account?.profilePicture}`}
+                                    src={`https://blog-app-13f4.onrender.com/${user?.account?.profilePicture}`}
                                     alt="Profile"
                                     className="rounded-full w-40 h-40 object-cover"
                                 />

@@ -10,7 +10,7 @@ function PostItem({ post, userId, username, onDelete }) {
 
     const fetchComments = async () => {
         try {
-            const response = await axios.get(`http://localhost:3334/api/posts/${post._id}/comments`);
+            const response = await axios.get(`/api/posts/${post._id}/comments`);
             setComments(response.data);
         } catch (error) {
             console.error("Error fetching comments:", error);
@@ -25,7 +25,7 @@ function PostItem({ post, userId, username, onDelete }) {
         try {
             const userConfirm = window.confirm("Are you sure?");
             if (userConfirm) {
-                await axios.delete(`http://localhost:3334/api/posts/${postId}`, {
+                await axios.delete(`/api/posts/${postId}`, {
                     headers: {
                         Authorization: localStorage.getItem('token')
                     }
