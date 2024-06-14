@@ -8,7 +8,7 @@ export default function CommentForm({ postId, refreshComments }) {
         e.preventDefault();
         const commentData = { content };
         try {
-           const response =  await axios.post(`/api/posts/${postId}/comments`, commentData, {
+           const response = await axios.post(`/api/posts/${postId}/comments`, commentData, {
                 headers: { Authorization: localStorage.getItem('token') }
             });
             setContent('');
@@ -20,7 +20,7 @@ export default function CommentForm({ postId, refreshComments }) {
 
     return (
         <div className="mt-4">
-            <form onSubmit={handleSubmit} className="flex items-center space-x-4">
+            <form onSubmit={handleSubmit} className="flex flex-col md:flex-row items-stretch md:items-center space-y-2 md:space-y-0 md:space-x-4">
                 <input
                     type="text"
                     id="content"
@@ -28,13 +28,12 @@ export default function CommentForm({ postId, refreshComments }) {
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     placeholder="Add a comment..."
-                    className="flex-1 border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
+                    className="flex-1 md:w-auto border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
                 />
-                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 md:w-auto">
                     Post
                 </button>
             </form>
-            
         </div>
     );
 }

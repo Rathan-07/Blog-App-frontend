@@ -85,7 +85,7 @@ function PostItem({ post, userId, username, onDelete }) {
         try {
             const userConfirm = window.confirm("Are you sure?");
             if (userConfirm) {
-                await axios.delete(`/posts/${postId}`, {
+                await axios.delete(`/api/posts/${postId}`, {
                     headers: {
                         Authorization: localStorage.getItem('token')
                     }

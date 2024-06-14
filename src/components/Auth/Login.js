@@ -11,8 +11,6 @@ export default function Login({loggedIn}) {
     const { dispatch } = useAuth();
     const [loading, setLoading] = useState(false); // Initialize loading state
 
-  
-
     const validationSchema = Yup.object().shape({
         email: Yup.string().email('Invalid email format').required('Email is required'),
         password: Yup.string().required('Password is required').min(8, 'Password must be at least 8 characters').max(128, 'Password must be at most 128 characters'),
@@ -50,12 +48,12 @@ export default function Login({loggedIn}) {
     return (
         <section className="h-screen bg-gray-100 flex items-center justify-center">
             <div className="container h-full px-6 py-12">
-                <div className="flex h-full flex-wrap items-center justify-center lg:justify-between">
-                    <div className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
+                <div className="flex flex-wrap items-center justify-center lg:justify-between h-full space-y-6 lg:space-y-0">
+                    <div className="w-full lg:w-6/12 mb-6 lg:mb-0">
                         <img src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" className="w-full" alt="Phone image" />
                     </div>
 
-                    <div className="md:w-8/12 lg:ms-6 lg:w-5/12 bg-white p-8 rounded shadow-lg">
+                    <div className="w-full lg:w-5/12 bg-white p-8 rounded shadow-lg">
                         <Formik
                             initialValues={{ email: '', password: '' }}
                             validationSchema={validationSchema}
